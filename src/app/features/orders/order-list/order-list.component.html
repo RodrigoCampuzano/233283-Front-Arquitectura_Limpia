@@ -1,12 +1,12 @@
-<div class="container">
+  <div class="container">
     <h2>Orders</h2>
     <form (ngSubmit)="addOrder()">
-      <input [(ngModel)]="newOrder.userId" name="userId" placeholder="User ID" required>
-      <input [(ngModel)]="newOrder.amount" name="amount" placeholder="Amount" required>
-      <input [(ngModel)]="newOrder.status" name="status" placeholder="Status" required>
+      <input [(ngModel)]="newOrder.User_ID" name="user_id" placeholder="User ID" type="number" required>
+      <input [(ngModel)]="newOrder.Amount" name="amount" placeholder="Amount" type="number" required>
+      <input [(ngModel)]="newOrder.Status" name="status" placeholder="Status" required>
       <button type="submit">Add Order</button>
     </form>
-  
+
     <table>
       <tr>
         <th>ID</th>
@@ -16,19 +16,19 @@
         <th>Actions</th>
       </tr>
       <tr *ngFor="let order of orders">
-        <td>{{ order.id }}</td>
-        <td *ngIf="editingOrder?.id !== order?.id">{{ order?.userId }}</td>
-        <td *ngIf="editingOrder?.id !== order?.id">{{ order?.amount }}</td>
-        <td *ngIf="editingOrder?.id !== order?.id">{{ order?.status }}</td>
-        <td *ngIf="editingOrder?.id === order?.id">
-            <input [(ngModel)]="editingOrder!.userId" name="editUserId{{ order.id }}">
-            <input [(ngModel)]="editingOrder!.amount" name="editAmount{{ order.id }}">
-            <input [(ngModel)]="editingOrder!.status" name="editStatus{{ order.id }}">
-          </td>          
+        <td>{{ order.ID }}</td> 
+        <td *ngIf="!editingOrder || editingOrder.ID !== order.ID">{{ order.User_ID }}</td>
+        <td *ngIf="!editingOrder || editingOrder.ID !== order.ID">{{ order.Amount }}</td>
+        <td *ngIf="!editingOrder || editingOrder.ID !== order.ID">{{ order.Status }}</td>
+        <td *ngIf="editingOrder && editingOrder.ID === order.ID">
+          <input [(ngModel)]="editingOrder.User_ID" name="editNaem">
+          <input [(ngModel)]="editingOrder.Amount" name="editiAmount">
+          <input [(ngModel)]="editingOrder.Status" name="editiSatus">
+        </td>
         <td>
-          <button *ngIf="editingOrder?.id !== order.id" (click)="editOrder(order)">Edit</button>
-          <button *ngIf="editingOrder?.id === order.id" (click)="updateOrder()">Save</button>
-          <button (click)="deleteOrder(order.id)">Delete</button>
+          <button *ngIf="!editingOrder || editingOrder.ID !== order.ID" (click)="editOrder(order)">Edit</button>
+          <button *ngIf="editingOrder && editingOrder.ID === order.ID" (click)="updateOrder()">Save</button>
+          <button (click)="deleteOrder(order.ID)">Delete</button>
         </td>
       </tr>
     </table>
