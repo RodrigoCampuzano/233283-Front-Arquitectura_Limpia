@@ -27,7 +27,7 @@
         </td>
         <td>
           <button *ngIf="!editingOrder || editingOrder.ID !== order.ID" (click)="editOrder(order)">Edit</button>
-          <button *ngIf="editingOrder && editingOrder.ID === order.ID" (click)="updateOrder()">Save</button>
+          <button *ngIf=" editingOrder && editingOrder.ID === order.ID" (click)="updateOrder()">Save</button>
           <button (click)="deleteOrder(order.ID)">Delete</button>
         </td>
       </tr>
