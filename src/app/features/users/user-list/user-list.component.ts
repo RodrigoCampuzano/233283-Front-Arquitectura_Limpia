@@ -8,7 +8,7 @@ import { User } from '@core/models/user.model';
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
-  newUser: User = { id: 0, name: '', email: '' };
+  newUser: User = { ID: 0, Name: '', Email: '' };
   editingUser: User | null = null;
 
   constructor(private userService: UserService) {}
@@ -20,13 +20,15 @@ export class UserListComponent implements OnInit {
   loadUsers(): void {
     this.userService.getUsers().subscribe((data) => {
       this.users = data;
+      console.log(this.users);
+      
     });
   }
 
   addUser(): void {
     this.userService.createUser(this.newUser).subscribe(() => {
       this.loadUsers();
-      this.newUser = { id: 0, name: '', email: '' };
+      this.newUser = { ID: 0, Name: '', Email: '' };
     });
   }
 
@@ -36,7 +38,7 @@ export class UserListComponent implements OnInit {
 
   updateUser(): void {
     if (this.editingUser) {
-      this.userService.updateUser(this.editingUser.id, this.editingUser).subscribe(() => {
+      this.userService.updateUser(this.editingUser.ID, this.editingUser).subscribe(() => {
         this.loadUsers();
         this.editingUser = null;
       });

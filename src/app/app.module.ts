@@ -16,9 +16,9 @@ import { OrderListComponent } from './features/orders/order-list/order-list.comp
     OrderListComponent
   ],
   imports: [
-    AppRoutingModule, // ✅ Esto debe ir después de RouterModule
-    RouterModule, // ✅ Asegúrate de incluir RouterModule aquí
     BrowserModule,
+    RouterModule, // ✅ Asegúrate de incluir RouterModule aquí
+    AppRoutingModule, // ✅ Esto debe ir después de RouterModule
     HttpClientModule,
     FormsModule
   ],

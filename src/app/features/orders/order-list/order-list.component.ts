@@ -8,7 +8,7 @@ import { Order } from '@core/models/order.model';
 })
 export class OrderListComponent implements OnInit {
   orders: Order[] = [];
-  newOrder: Order = { id: 0, userId: 0, amount: 0, status: '' };
+  newOrder: Order = { ID: 0, User_ID: 0, Amount: 0, Status: '' };
   editingOrder: Order | null = null;
 
   constructor(private orderService: OrderService) {}
@@ -20,13 +20,14 @@ export class OrderListComponent implements OnInit {
   loadOrders(): void {
     this.orderService.getOrders().subscribe((data) => {
       this.orders = data;
+      console.log(this.orders);
     });
   }
 
   addOrder(): void {
     this.orderService.createOrder(this.newOrder).subscribe(() => {
       this.loadOrders();
-      this.newOrder = { id: 0, userId: 0, amount: 0, status: '' };
+      this.newOrder = { ID: 0, User_ID: 0, Amount: 0, Status: '' };
     });
   }
 
@@ -36,7 +37,7 @@ export class OrderListComponent implements OnInit {
 
   updateOrder(): void {
     if (this.editingOrder) {
-      this.orderService.updateOrder(this.editingOrder.id, this.editingOrder).subscribe(() => {
+      this.orderService.updateOrder(this.editingOrder.ID, this.editingOrder).subscribe(() => {
         this.loadOrders();
         this.editingOrder = null;
       });
