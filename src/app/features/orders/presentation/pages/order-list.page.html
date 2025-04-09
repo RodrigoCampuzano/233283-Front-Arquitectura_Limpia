@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Orders</h2>
+  <form (ngSubmit)="viewModel.addOrder()">
+    <input [(ngModel)]="viewModel.newOrder.User_ID" name="user_id" placeholder="User ID" type="number" required>
+    <input [(ngModel)]="viewModel.newOrder.Amount" name="amount" placeholder="Amount" type="number" required>
+    <input [(ngModel)]="viewModel.newOrder.Status" name="status" placeholder="Status" required>
+    <button type="submit">Add Order</button>
+  </form>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>User ID</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let order of viewModel.orders$ | async">
+      <td>{{ order.ID }}</td>
+      <td *ngIf="!viewModel.editingOrder || viewModel.editingOrder.ID !== order.ID">{{ order.User_ID }}</td>
+      <td *ngIf="!viewModel.editingOrder || viewModel.editingOrder.ID !== order.ID">{{ order.Amount }}</td>
+      <td *ngIf="!viewModel.editingOrder || viewModel.editingOrder.ID !== order.ID">{{ order.Status }}</td>
+      <td *ngIf="viewModel.editingOrder && viewModel.editingOrder.ID === order.ID">
+        <input [(ngModel)]="viewModel.editingOrder.User_ID" name="editUserId">
+        <input [(ngModel)]="viewModel.editingOrder.Amount" name="editAmount">
+        <input [(ngModel)]="viewModel.editingOrder.Status" name="editStatus">
+      </td>
+      <td>
+        <button *ngIf="!viewModel.editingOrder || viewModel.editingOrder.ID !== order.ID" (click)="viewModel.editOrder(order)">Edit</button>
+        <button *ngIf="viewModel.editingOrder && viewModel.editingOrder.ID === order.ID" (click)="viewModel.updateOrder()">Save</button>
+        <button (click)="viewModel.deleteOrder(order.ID)">Delete</button>
+      </td>
+    </tr>
+  </table>
+</div>

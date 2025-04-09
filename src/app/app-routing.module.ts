@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserListComponent } from './features/users/user-list/user-list.component';
-import { OrderListComponent } from './features/orders/order-list/order-list.component';
+import { UserListPage } from './features/users/presentation/pages/user-list.page';
+import { OrderListPage } from './features/orders/presentation/pages/order-list.page';
 
 const routes: Routes = [
-  { path: 'users', component: UserListComponent },
-  { path: 'orders', component: OrderListComponent },
+  { path: 'users', component: UserListPage },
+  { path: 'orders', component: OrderListPage },
   { path: '', redirectTo: '/users', pathMatch: 'full' }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
