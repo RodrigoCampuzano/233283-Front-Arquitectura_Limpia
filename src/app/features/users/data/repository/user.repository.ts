@@ -4,17 +4,13 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
-export class UserService {
+export class UserRepository {
   private apiUrl = 'http://localhost:8080/users';
 
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/all`);
-  }
-
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/get/${id}`);
+    return this.http.get<User[]>(`${this.apiUrl}`);
   }
 
   createUser(user: User): Observable<User> {
@@ -22,14 +18,10 @@ export class UserService {
   }
 
   updateUser(id: number, user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/update/${id}`, user);
+    return this.http.put<User>(`${this.apiUrl}/${id}`, user);
   }
 
   deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
-  }
-
-  deleteAllUsers(): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/deleteall`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
